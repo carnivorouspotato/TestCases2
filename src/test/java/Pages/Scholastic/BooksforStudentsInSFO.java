@@ -1,8 +1,6 @@
 package Pages.Scholastic;
 import Pages.BasePage;
-import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +34,27 @@ public class BooksforStudentsInSFO extends BasePage {
     /***/
     /**Array List for item numbers*/
      public static List<String> listOfItemNumbers = new ArrayList<String>();
-     public static List<WebElement> compareItemNumber = new ArrayList<>();
+
+     /***/
+
+     /**Locators for if statment
+     By itemNumberForQty = By.xpath("//tr[@class='odd']//td[@class=' itemNum details-control']");
+     By qtyBoxOdd = By.xpath("//tr[@class='odd']//input[@type='text']");
+     By qtyBoxEven= By.xpath("//tr[@class='even']//input[@type='text']");
+    //tr[@class='odd']//input[@class='input-qty numericenteronly']
+      */
+
+     /**Getting text for verification*/
+     By harryAmorDeCachorritoStudentName = By.xpath("//tbody/tr[1]/td[2]");
+     By harryAdoptANarwhalStudentName = By.xpath("//tbody/tr[2]/td[2]");
+     By harryACausaDelConejoStudentName = By.xpath("//tbody/tr[3]/td[2]");
+     /***/
+
+     /**Locators to set quantity and review cart*/
+     By qtyBoxForAmorDeCachorrito = By.xpath("//tbody/tr[1]/td[8]/input[1]");
+     By qtyBoxForAdoptANarwhal = By.xpath("//tbody/tr[2]/td[8]/input[1]");
+     By qtyBoxForACausaDelConejo = By.xpath("//tbody/tr[3]/td[8]/input[1]");
+     By reviewCartButton = By.xpath("//button[contains(text(),'Review Cart')]");
 
 
     public void signintoTeacherAccount () throws InterruptedException {
@@ -65,27 +83,28 @@ public class BooksforStudentsInSFO extends BasePage {
             listOfItemNumbers.add("2R5");
             listOfItemNumbers.add("3R5");
             /****************************/
-
-
        for (int i = 0 ; i < 3  ; i++){
-           clickThisAndSendKeys(inputItemNumber, listOfItemNumbers.get(i));
+           clickThis(inputItemNumber);
+           type(inputItemNumber, listOfItemNumbers.get(i));
            pauseExplicit(addByItemNumber);
            clickThis(addByItemNumber);
-           compareItemNumber.add((getText(listOfItemNumbersPrint)));
-           pause();
        }
 
+       forInputVerification(harryAmorDeCachorritoStudentName, "Harry");
 
 
 
 
     }
 
+    public void settingQTyForBooks () throws InterruptedException {
+    clearTextSendKeys(qtyBoxForAmorDeCachorrito, "2");
+    clearTextSendKeys(qtyBoxForAdoptANarwhal, "4");
+    clearTextSendKeys(qtyBoxForACausaDelConejo, "1");
+        clickThis(reviewCartButton);
+        Thread.sleep(10000);
+    }
+
 
 }
-/**
- * --> 1R5
- * --> 2R5
- * --> 3R5
- *
- * */
+

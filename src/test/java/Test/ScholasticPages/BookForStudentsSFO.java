@@ -12,6 +12,7 @@ public class BookForStudentsSFO extends Web {
         sfoFlyer.closeDropDownAtMainScreen();
         sfoFlyer.closeShopAsParentMessage();
         sfoFlyer.startNewOrder();
+        sfoFlyer.settingQTyForBooks();
     }
 
 }

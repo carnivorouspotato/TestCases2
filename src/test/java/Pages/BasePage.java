@@ -7,8 +7,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import static org.junit.Assert.assertTrue;
 
 public class BasePage {
 
@@ -66,10 +68,16 @@ public class BasePage {
         return findElementUsingFluentWait(locator).isDisplayed();
     }
 
-    public WebElement getText(By locator) {
-        findElementUsingFluentWait(locator).getText();
+    public void getText(By locator) {
         System.out.println(findElementUsingFluentWait(locator).getText());
-        return null;
+    }
+
+
+    public void clearTextSendKeys (By locator, String data){
+        findElementUsingFluentWait(locator).click();
+        findElementUsingFluentWait(locator).clear();
+        findElementUsingFluentWait(locator).sendKeys(data);
+        findElementUsingFluentWait(locator).sendKeys(Keys.TAB);
     }
 
     public void loopToClickElements(By locator) throws InterruptedException {
@@ -95,8 +103,6 @@ public class BasePage {
             clickTopOfList.click();
             break;
         }
-
-
     }
 
     public void hoverOverElement (By locator){
@@ -104,24 +110,22 @@ public class BasePage {
         action.moveToElement(findElementUsingFluentWait(locator)).perform();
     }
 
+   /**public void elementsAreEqualToInput (By locator, java.lang.String data){
+        data.equals(findElementUsingFluentWait(locator).getText());
+       System.out.println("Element and input match");
 
 
+   }*/
 
+   public void forInputVerification (By locator, String data){
+       ArrayList listForInputVerification = new ArrayList();
+            listForInputVerification.add(findElementUsingFluentWait(locator).getText());
+       if (listForInputVerification.contains(data)){
+           System.out.println("input and elements match");
+       }
 
-    /**
-     * select any value form any dropdown (locator, String)
-     *
-     * WebElement date = driver.findElement(By.id("month"));
-     * Select dateDropdown = new Select(date);
-     * dateDropdown.selectByVisibleText("Feb");
-     *
-     */
+   }
 
-    /** public void selectFromDropdownUsingVisibleText(By locator, String data) {
-     WebElement dropdownElement = findElementUsingFluentWait(locator);
-     Select dropdown = new Select(dropdownElement);
-     dropdown.selectByVisibleText(data);
-     }*/
 
 
 }
